@@ -1,4 +1,5 @@
 import { Item } from "../utils/items.ts";
+import ItemComponent from "../islands/Item.tsx";
 
 interface ItemsProp {
   items: Item[];
@@ -10,14 +11,8 @@ export default function ItemsComponent({ items }: ItemsProp) {
       <h1 className="text-center text-2xl font-bold">
         Browse our collection of great Items
       </h1>
-      <div className="mt-10 grid grid-cols-2 md:grid-cols-3  lg:grid-cols-4 gap-4">
-        {items.map((item) => (
-          <section>
-            <img src={item.image} alt="item image" />
-            <h3>{item.name}</h3>
-            <p>{item.price}</p>
-          </section>
-        ))}
+      <div className="mt-10 grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 gap-4">
+        {items.map((item) => <ItemComponent item={item} />)}
       </div>
     </div>
   );
