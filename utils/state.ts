@@ -1,3 +1,6 @@
+import { installGlobals } from "https://deno.land/x/virtualstorage@0.1.0/mod.ts";
+installGlobals();
+
 import { Signal, signal } from "@preact/signals";
 import { Item } from "./items.ts";
 
@@ -18,10 +21,7 @@ export type AppStateType = {
 };
 
 function createAppState(): AppStateType {
-  let cartData;
-  if (typeof window !== "undefined") {
-    cartData = localStorage.getItem("CART");
-  }
+  const cartData = localStorage.getItem("CART");
   const cart = signal<CartItem[]>(cartData ? JSON.parse(cartData) : []);
   // create
   const addToCart: AddToCartFunction = (item: Item): void => {
@@ -38,9 +38,8 @@ function createAppState(): AppStateType {
         quantity: 1,
       }];
     }
-    if (typeof window !== "undefined") {
-      localStorage.setItem("CART", JSON.stringify(cart.value));
-    }
+
+    localStorage.setItem("CART", JSON.stringify(cart.value));
   };
 
   // delete
@@ -54,10 +53,8 @@ function createAppState(): AppStateType {
       } else {
         cart.value = cart.value.filter((cartItem) => cartItem.id !== id);
       }
-      if (typeof window !== "undefined") {
-        // Perform localStorage action
-        localStorage.setItem("CART", JSON.stringify(cart.value));
-      }
+
+      localStorage.setItem("CART", JSON.stringify(cart.value));
     }
   };
 
