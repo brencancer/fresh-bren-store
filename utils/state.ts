@@ -18,7 +18,10 @@ export type AppStateType = {
 };
 
 function createAppState(): AppStateType {
-  const cartData = localStorage.getItem("CART");
+  let cartData;
+  if (typeof window !== "undefined") {
+    cartData = localStorage.getItem("CART");
+  }
   const cart = signal<CartItem[]>(cartData ? JSON.parse(cartData) : []);
   // create
   const addToCart: AddToCartFunction = (item: Item): void => {
