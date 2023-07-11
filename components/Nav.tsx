@@ -1,3 +1,5 @@
+import CartCounter from "../islands/CartCounter.tsx";
+
 export default function Nav() {
   return (
     <div className="
@@ -18,8 +20,12 @@ export default function Nav() {
           </a>
         </li>
         <li>
-          <a href="/" className="text-gray-500 hover:text-gray-700 py-1 border">
+          <a
+            href="/cart"
+            className="text-gray-500 hover:text-gray-700 py-1 border"
+          >
             Cart
+            <CartCounter />
           </a>
         </li>
       </ul>
