@@ -35,7 +35,9 @@ function createAppState(): AppStateType {
         quantity: 1,
       }];
     }
-    localStorage.setItem("CART", JSON.stringify(cart.value));
+    if (typeof window !== "undefined") {
+      localStorage.setItem("CART", JSON.stringify(cart.value));
+    }
   };
 
   // delete
@@ -49,7 +51,10 @@ function createAppState(): AppStateType {
       } else {
         cart.value = cart.value.filter((cartItem) => cartItem.id !== id);
       }
-      localStorage.setItem("CART", JSON.stringify(cart.value));
+      if (typeof window !== "undefined") {
+        // Perform localStorage action
+        localStorage.setItem("CART", JSON.stringify(cart.value));
+      }
     }
   };
 
